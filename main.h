@@ -37,6 +37,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "pin_def.h"
 //#include "periphral header file"
 
 //Assign System Clock macro for delay
