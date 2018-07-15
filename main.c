@@ -17,7 +17,15 @@ void main(void)
     
     while(1)
     {
+        LATC0 = 0;
+        LATC1 = 0;
         
+        __delay_ms(500);
+        
+        LATC0 = 1;
+        LATC1 = 1;
+        
+        __delay_ms(500);        
     }       
 }
 
