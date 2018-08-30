@@ -16,10 +16,16 @@ extern "C" {
 
 #define SRV_SIG     LATA2
 #define SRV_PWR     LATA0
-        
+
+#define SRV_ON      (uint8_t)1
+#define SRV_OFF     (uint8_t)0
+
 #define LED1        LATC0
 #define LED2        LATC1
 
+#define LED_ON      (uint8_t)0
+#define LED_OFF     (uint8_t)1
+    
 #define BLE_WAKE_HW LATC2
 #define BLE_WAKE_SW LATC3
 
