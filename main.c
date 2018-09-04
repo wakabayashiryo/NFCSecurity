@@ -7,7 +7,7 @@
 
 #include "main.h"
 
-uint16_t srv_param = 200;
+uint16_t srv_param = 500;
 
 void main(void) 
 {
@@ -44,7 +44,7 @@ void main(void)
     {
         SRV_PWR = SRV_ON;
         
-        for(uint16_t agl = 200;agl<2000;agl++)
+        for(uint16_t agl = 450;agl<1000;agl++)
         {
             srv_param = agl;
             __delay_ms(10);
