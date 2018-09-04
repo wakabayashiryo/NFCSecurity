@@ -37,6 +37,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "PIC_UART.h"
 //#include "periphral header file"
 
 //Assign System Clock macro for delay
@@ -72,7 +73,7 @@
 //type declaration in area
 void Device_Startup(void);
 
-
+void UART_Init_Port(void);
 #ifdef	__cplusplus
 extern "C" {
 #endif /* __cplusplus */

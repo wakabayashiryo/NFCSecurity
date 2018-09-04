@@ -7,17 +7,15 @@
 
 #include "main.h"
 
-
 void main(void) 
 {
     Device_Startup();
     
-    //peripheral initialize functions etc...
-    
+    UART_Init(UART_Init_Port,BAUD_115_2K);
     
     while(1)
     {
-        
+        printf("hello world");
     }       
 }
 
@@ -31,7 +29,7 @@ void Device_Startup(void)
     WPUA = 0x00;
     LATA = 0x00;       //zero clear
     
-    TRISC = 0x20;       //set RC5 input for UART RX
+    TRISC = 0x00;       
     ANSELC = 0x00;    
     WPUC = 0x00;
     LATC = 0x00;       //zero clear
@@ -39,11 +37,11 @@ void Device_Startup(void)
 
 void interrupt Handler(void)
 {
-/*
-    if(Timer0_CheckFlag())
-    {
-        process...
-    }
- */
+    UART_Interrupt();
     
+}
+
+void UART_Init_Port(void)
+{
+    TRISC |= (1<<6);      //set RC5 input for UART RX
 }
