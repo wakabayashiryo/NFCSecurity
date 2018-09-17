@@ -20,6 +20,7 @@ void main(void)
     
     while(1)
     {
+
         SRV_PWR = SRV_ON;
         
         for(uint16_t agl = 450;agl<1000;agl++)
@@ -27,6 +28,7 @@ void main(void)
             Servo_Set_Parameter(agl);
             __delay_ms(10);
         }
+        __delay_ms(500);  
     }       
 }
 
