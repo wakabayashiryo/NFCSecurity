@@ -37,6 +37,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "pin_def.h"
+#include "PIC_servo.h"
 //#include "periphral header file"
 
 //Assign System Clock macro for delay
@@ -72,6 +74,7 @@
 //type declaration in area
 void Device_Startup(void);
 
+void Servo_Init_Pin(void);
 
 #ifdef	__cplusplus
 extern "C" {
