@@ -14,6 +14,8 @@ void main(void)
     LED1 = LED_OFF;
     LED2 = LED_OFF;
     
+    UART_Init(UART_Init_Port,BAUD_115_2K);
+    
     SRV_PWR = SRV_OFF;
     
     Servo_Init(Servo_Init_Pin,&LATA,2);
@@ -37,13 +39,13 @@ void Device_Startup(void)
 
     OSCCON = 0xF0;      //8MHz(internal),PLL enable ,
 
-    TRISA  = 0x02;      //set RA1 input for sensor 
+    TRISA  = 0x02;      //set RA1 input for sensor.others pin is output 
     ANSELA = 0x00;      //All PORTA  are set digital
     WPUA   = 0x00;
     LATA   = 0x00;      //zero clear
     
-    TRISC  = 0x20;      //set RC5 input for UART RX
-    ANSELC = 0x00;    
+    TRISC  = 0x00;      //All pin is set output
+    ANSELC = 0x00;      //All PORTC are set digital
     WPUC   = 0x00;
     LATC   = 0x00;      //zero clear
 }
@@ -57,4 +59,10 @@ void Servo_Init_Pin(void)
 void interrupt Handler(void)
 {
     Servo_Transmit_Interrupt();
+    UART_Interrupt();
+}
+
+void UART_Init_Port(void)
+{
+    TRISC |= (1<<6);      //set RC5 input for UART RX
 }

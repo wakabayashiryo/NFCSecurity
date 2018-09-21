@@ -37,6 +37,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "PIC_UART.h"
 #include "pin_def.h"
 #include "PIC_servo.h"
 //#include "periphral header file"
@@ -74,6 +75,7 @@
 //type declaration in area
 void Device_Startup(void);
 
+void UART_Init_Port(void);
 void Servo_Init_Pin(void);
 
 #ifdef	__cplusplus

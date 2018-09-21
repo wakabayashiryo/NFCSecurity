@@ -14,7 +14,6 @@ extern "C" {
 
 #define MAG_SENSOR  LATA1
 
-#define SRV_SIG     LATA2
 #define SRV_PWR     LATA0
 
 #define SRV_ON      (uint8_t)1
