@@ -15,7 +15,7 @@ void main(void)
     
     while(1)
     {
-        printf("hello world");
+        printf("hello world\n");
     }       
 }
 
@@ -38,7 +38,6 @@ void Device_Startup(void)
 void interrupt Handler(void)
 {
     UART_Interrupt();
-    
 }
 
 void UART_Init_Port(void)
