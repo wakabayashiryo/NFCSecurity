@@ -11,10 +11,10 @@ void main(void)
 {
     Device_Startup();
     
-    UART_Init(UART_Init_Port,BAUD_115_2K);
-    
     LED1 = LED_OFF;
     LED2 = LED_OFF;
+    
+    UART_Init(UART_Init_Port,BAUD_115_2K);
     
     SRV_PWR = SRV_OFF;
     
@@ -39,13 +39,13 @@ void Device_Startup(void)
 
     OSCCON = 0xF0;      //8MHz(internal),PLL enable ,
 
-    TRISA  = 0x02;      //set RA1 input for sensor 
+    TRISA  = 0x02;      //set RA1 input for sensor.others pin is output 
     ANSELA = 0x00;      //All PORTA  are set digital
     WPUA   = 0x00;
     LATA   = 0x00;      //zero clear
     
-    TRISC = 0x00;       
-    ANSELC = 0x00;    
+    TRISC  = 0x00;      //All pin is set output
+    ANSELC = 0x00;      //All PORTC are set digital
     WPUC   = 0x00;
     LATC   = 0x00;      //zero clear
 }

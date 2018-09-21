@@ -8,7 +8,7 @@
  *  
  */
 
-static uint16_t srv_param = 0;
+static uint16_t srv_param = _SERVO_PARAM_MIN;
 
 static volatile uint8_t *SigPort;
 static uint8_t SigPin_Mask;

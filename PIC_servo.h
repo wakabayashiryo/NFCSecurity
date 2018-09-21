@@ -16,7 +16,7 @@ extern "C" {
 #define _SERVO_PARAM_MAX    2000
     
 
-    typedef void (*Servo_Init_PORTTypedef)(void);
+typedef void (*Servo_Init_PORTTypedef)(void);
 
 
 void Servo_Init(Servo_Init_PORTTypedef Servo_InitPort,volatile uint8_t *Signal_PORT,uint8_t  Signal_Pin);

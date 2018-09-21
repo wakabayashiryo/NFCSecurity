@@ -1,9 +1,10 @@
 /*
- * File:   UART_Driver.h
- * Author: Oishi
+ * File:   PIC_UART.h
+ * Author: Wakabayashi
  *
- * Created on 2015/02/22, 19:27
+ * Created on 2018/09/21
  */
+
 #ifndef PIC_UART_H
 #define	PIC_UART_H
 
