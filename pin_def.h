@@ -24,9 +24,6 @@ extern "C" {
 
 #define LED_ON      (uint8_t)0
 #define LED_OFF     (uint8_t)1
-    
-#define BLE_WAKE_HW LATC2
-#define BLE_WAKE_SW LATC3
 
 #ifdef	__cplusplus
 }

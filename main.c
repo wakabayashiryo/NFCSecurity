@@ -20,6 +20,8 @@ void main(void)
     
     Servo_Init(Servo_Init_Pin,&LATA,2);
     
+    RN4020_Init();
+
     while(1)
     {
 
