@@ -18,7 +18,11 @@ extern "C" {
 #define _RN4020_WAKE_HW     LATC2
 #define _RN4020_WAKE_SW     LATC3
 
-void RN4020_Init(void);
+#define SERVICE_UUID        "3A41CCA5A1F946909D5E11A946BAFCB4"
+#define CHARACTERISTIC_UUID "3A41CCA5A1F946909D5E11A946BAFCB4,1A,08"
+
+void RN4020_Send_Command(const char *cmd,const char *data);
+void RN4020_Init_Central(void);
 
 
 #ifdef	__cplusplus
