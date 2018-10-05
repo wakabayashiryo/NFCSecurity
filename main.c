@@ -20,25 +20,8 @@ void main(void)
     
     Servo_Init(Servo_Init_Pin,&LATA,2);
     
-    _RN4020_WAKE_SW = 1;
-    _RN4020_WAKE_HW = 1;
-
-    RN4020_Send_Command("SF,","1");         //factory reset,
-    RN4020_Send_Command("SB,","4");
-    RN4020_Send_Command("SR,","20000000");
-    RN4020_Send_Command("SS,","80040001");
-    RN4020_Send_Command("PZ,","");
-    RN4020_Send_Command("R,","1");
-    __delay_ms(1000);
+    RN4020_Init_PP();
     
-    RN4020_Send_Command("PS,",SERVICE_UUID);
-    RN4020_Send_Command("PC,",CHARACTERISTIC_UUID);
-    
-    RN4020_Send_Command("R,","1");
-    __delay_ms(1000);
-    
-//    RN4020_Send_Command("A","");
-
     while(1)
     {
 //        LED2 = LED_ON;
