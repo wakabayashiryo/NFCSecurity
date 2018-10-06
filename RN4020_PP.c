@@ -8,12 +8,14 @@
 
 static void RN4020_Send_Command(const char* cmd)
 {    
+    UART_Flush();
+    
     puts(cmd);
     
     while(UART_Available()==0);
     while((char)UART_Receive()!='\n');
     
-    LED2 = !LED2;
+//    LED2 = !LED2;
 }
 
 void RN4020_Init_PP(void)
@@ -33,6 +35,6 @@ void RN4020_Init_PP(void)
     RN4020_Send_Command(_PC _PRIVATE_CHARACTERISTIC1 and data(1A) and data(08));
     RN4020_Send_Command(_PC _PRIVATE_CHARACTERISTIC2 and data(1A) and data(08));
     
-    RN4020_Send_Command(_A);                    //reboot
+    RN4020_Send_Command(_R_1);                    //reboot
 }
 

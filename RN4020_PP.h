@@ -13,7 +13,6 @@ extern "C" {
 #endif
 #include "main.h"
 
-
     
 #define _RN4020_WAKE_HW     LATC2
 #define _RN4020_WAKE_SW     LATC3
