@@ -41,7 +41,7 @@
 #include "pin_def.h"
 #include "PIC_UART.h"
 #include "PIC_servo.h"
-#include "RN4020_PP.h"
+#include "RN4020.h"
 //#include "periphral header file"
 
 //Assign System Clock macro for delay

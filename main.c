@@ -24,7 +24,7 @@ void main(void)
     
     while(1)
     {
-//        LED2 = LED_ON;
+//        RN4020_Set_MagneticSensor(RN4020_Get_ServoParameter());
         
         SRV_PWR = SRV_ON;
         

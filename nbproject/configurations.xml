@@ -8,8 +8,8 @@
       <itemPath>main.h</itemPath>
       <itemPath>pin_def.h</itemPath>
       <itemPath>PIC_servo.h</itemPath>
-      <itemPath>RN4020_PP.h</itemPath>
       <itemPath>RN4020_Cmds.h</itemPath>
+      <itemPath>RN4020.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -21,7 +21,7 @@
       <itemPath>PIC_UART.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>PIC_servo.c</itemPath>
-      <itemPath>RN4020_PP.c</itemPath>
+      <itemPath>RN4020.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
