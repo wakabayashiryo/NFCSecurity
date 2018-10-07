@@ -21,15 +21,15 @@ void RN4020_Init_PP(void)
 
     RN4020_Send_Command(_SF data(1));           //factory reset,
     RN4020_Send_Command(_SB data(4));           //UART baudrate is 115200bps
-    RN4020_Send_Command(_SR data(20000000));    //Peripheral and auto advertise
+    RN4020_Send_Command(_SR data(24000000));    //Peripheral and auto advertise,No Direct Advertisement
     RN4020_Send_Command(_SS data(80040001));    //use service DeviceInformation,TX Power,Private service
 
     RN4020_Send_Command(_PZ);                   //Claer private service    
     RN4020_Send_Command(_PS _PRIVATE_SERVICE);
     RN4020_Send_Command(_PC _PRIVATE_UUID1 and data(02) and data(08));
     RN4020_Send_Command(_PC _PRIVATE_UUID2 and data(08) and data(08));
-    RN4020_Send_Command(_U);
-    RN4020_Send_Command(_R_1);                    //reboot
+    
+    RN4020_Send_Command(_R_1);                  //reboot
 }
 
 uint8_t RN4020_Get_ServoParameter(void)
