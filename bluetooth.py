@@ -4,6 +4,10 @@ from bluepy.btle import *
 # reference http://ianharvey.github.io/bluepy-doc/
 # japanese site https://qiita.com/iton/items/a0db46ebbe976494222a
 
+service_uuid         = "3A41CCA5A1F946909D5E11A946BAFCB4"
+characteristic_uuid1 = "1713453B292E4B1C9515F23DDAC2B2B0"
+characteristic_uuid2 = "EB57140A35404A6D8C9740D75DF4CBEF"
+
 scaner = Scanner(0)
 devices = scaner.scan(3)
 

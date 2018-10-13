@@ -26,9 +26,10 @@ RN4020 configration
 |charactaristic2| EB57140A35404A6D8C9740D75DF4CBEF |writing |8| magnetic sensor|
  
 
-1.confirm depended packages 
- > sudo apt-get install -y libglib2.0-dev libdbus-1-dev libudev-dev libical-dev libreadline-dev
 
+1.confirm depended packages 
+> sudo apt-get install -y libglib2.0-dev libdbus-1-dev libudev-dev libical-dev libreadline-dev
+   
 2. confirm libaray installed 
 > sudo apt-get install bluetooth bluez
 
@@ -43,9 +44,13 @@ check deamon service and start service.
 > git clone https://github.com/IanHarvey/bluepy.git   
 > sudo pip install bluepy
 
-topic:
-	serach BLE device and found its MAC address
-	> sudo hcitool lescan
-	or 
-	> sudo bluetoothctl
-	> scan on
+
+topic   
+	serach BLE device and found its MAC address   
+	
+	> sudo hcitool lescan   
+
+	or   
+
+	> sudo bluetoothctl   
+	> scan on   
