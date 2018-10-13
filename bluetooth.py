@@ -15,8 +15,8 @@ for dev in devices:
     print ("Device %s (%s), RSSI=%d dB"%(dev.addr, dev.addrType, dev.rssi))
 
 prphe = Peripheral()
-prphe.connect("00:1e:c0:4a:29:6d","public")
-srv = prphe.getServices()
+prphe.connect("00:1e:c0:4a:29:6d",ADDR_TYPE_PUBLIC)
+srv = prphe.getServicesByUUID("00:1e:c0:4a:29:6d")
 chara = prphe.getCharacteristics()
 
 for k in chara:
