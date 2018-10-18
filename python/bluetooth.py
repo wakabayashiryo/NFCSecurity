@@ -1,9 +1,6 @@
 from bluepy.btle import *
 
 # MAC adddress of RN4020 is 00:1e:c0:4a:29:6d
-# reference http://ianharvey.github.io/bluepy-doc/
-# japanese site https://qiita.com/iton/items/a0db46ebbe976494222a
-
 
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
@@ -11,30 +8,40 @@ class ScanDelegate(DefaultDelegate):
 
     def handleDiscovery(self,dev,isNewDev,isNewData):
         if isNewDev:
-            print("Discovered device", dev.addr)
-
-        elif isNewData:
-            print("Received new data from", dev.addr)
-
-class hoge():
-    def __init__(self,MACaddr):
-        self.ble = Scanner().withDelegate(ScanDelegate())
-        self.device = scanner.scan(10.0)
-
-        for dev in devices:
             print ("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
             for (adtype, desc, value) in dev.getScanData():
                 print ("  %s = %s" % (desc, value))
 
+        elif isNewData:
+            print("Received new data from %s "& dev.addr)
+
+class BLEcontroller:
+    def __init__(self,MACaddr):
+        self.error_code = ["DISCONNECTED","COMM_ERROR","INTERNAL_ERROR","GATT_ERROR","MGMT_ERROR"]
+
+        self.mac = MACaddr
+        self.ble = Scanner().withDelegate(ScanDelegate())
+
+        self.prphe = Peripheral()
 
     def scan(self,):
+        self.devices = self.ble.scan(timeout=1.0)        
+
+    def Show_detail(self):
         pass
 
     def connect(self):
-        pass
+        try:
+            self.prphe.connect(self.mac,ADDR_TYPE_PUBLIC)
+        except BTLEException as BLEexc:
+            print("The error cotents is "+self.error_code[BLEexc.code-1])
+            print(BLEexc.message)
 
     def disconnect(self):
-        pass
+        try:
+            self.prphe.connect(self.mac,ADDR_TYPE_PUBLIC)
+        except BTLEException as BLEexc:
+            print("The error cotents is "+self.error_code[BLEexc.code-1])
     
     def write(self,uuid):
         pass
@@ -42,27 +49,25 @@ class hoge():
     def read(self,uuid):
         pass
 
-    
 
+if __name__ == '__main__':    
+    service_uuid         = "3A41CCA5-A1F9-4690-9D5E-11A946BAFCB4"
+    characteristic_uuid1 = "1713453B-292E-4B1C-9515-F23DDAC2B2B0"
+    characteristic_uuid2 = "EB57140A-3540-4A6D-8C97-40D75DF4CBEF"
 
-service_uuid         = "3A41CCA5A1F946909D5E11A946BAFCB4"
-characteristic_uuid1 = "1713453B292E4B1C9515F23DDAC2B2B0"
-characteristic_uuid2 = "EB57140A35404A6D8C9740D75DF4CBEF"
+    ble = BLEcontroller("00:1e:c0:4a:29:6d");
+    ble.connect()
 
-scaner = Scanner(0)
-devices = scaner.scan(3)
+    srv = ble.prphe.getServices()
+    for s in srv:
+        print(s.uuid)
 
-for dev in devices:
-    print ("Device %s (%s), RSSI=%d dB"%(dev.addr, dev.addrType, dev.rssi))
+    if [str(srvs) in service_uuid for srvs in srv]:
+        print("found service")
+    else:
+        print()
 
-prphe = Peripheral()
-try:
-    prphe.connect("00:1e:c0:4a:29:6d",ADDR_TYPE_PUBLIC)
-except BTLEException:
-    print("error connect")
+    chara = ble.prphe.getCharacteristics()
 
-srv = prphe.getServicesByUUID("00:1e:c0:4a:29:6d")
-chara = prphe.getCharacteristics()
-
-for k in chara:
-    print(k.uuid)
+    for k in chara:
+        print(k.uuid)
