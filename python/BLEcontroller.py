@@ -27,17 +27,16 @@ class BLEcontroller:
         self.peripheral = Peripheral()
 
     def setService(self,key,uuid):
-		if uuid.isupper():
-        	self.SeriviceList[key] = uuid.lower()
-		else:
-			self.SeriviceList[key] = uuid
-		
-    
+        if uuid.isupper():
+            self.SeriviceList[key] = uuid.lower()
+        else:
+            self.SeriviceList[key] = uuid
+            
     def setCharacteristic(self,key,uuid):
-		if uuid.isupper():
-			self.CharacteristicList[key] = uuid.lower()
-		else:
-			self.CharacteristicList[key] = uuid
+        if uuid.isupper():
+            self.CharacteristicList[key] = uuid.lower()
+        else:
+            self.CharacteristicList[key] = uuid
 
     def scan(self,timeout=3.0,show=False):
         self.devices = self.serach.scan(timeout)        
@@ -55,11 +54,11 @@ class BLEcontroller:
         #     print("found service")
         # else:
         #     raise BTLEException(BTLEException.GATT_ERROR,"The UUID registered do not inclued")
-    	matchNum = 0
+        matchNum = 0
         for chara in charas:
-			if chara.uuid in self.CharacteristicList.values():
-            	print(chara.uuid)
-				matchNum += 1
+            if chara.uuid in self.CharacteristicList.values():
+                print(chara.uuid)
+                matchNum += 1
         if matchNum is len(self.CharacteristicList):
             raise BTLEException(BTLEException.GATT_ERROR,"The UUID registered do not inclued")
 
