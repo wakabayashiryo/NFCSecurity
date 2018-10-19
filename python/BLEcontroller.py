@@ -26,11 +26,18 @@ class BLEcontroller:
         self.serach = Scanner().withDelegate(ScanDelegate())
         self.peripheral = Peripheral()
 
-    def Service_Register(self,key,uuid):
-        self.SeriviceList[key] = uuid
+    def setService(self,key,uuid):
+		if uuid.isupper():
+        	self.SeriviceList[key] = uuid.lower()
+		else:
+			self.SeriviceList[key] = uuid
+		
     
-    def Characteristic_Register(self,key,uuid):
-        self.CharacteristicList[key] = uuid    
+    def setCharacteristic(self,key,uuid):
+		if uuid.isupper():
+			self.CharacteristicList[key] = uuid.lower()
+		else:
+			self.CharacteristicList[key] = uuid
 
     def scan(self,timeout=3.0,show=False):
         self.devices = self.serach.scan(timeout)        
@@ -44,20 +51,16 @@ class BLEcontroller:
         srvs = self.peripheral.getServices()
         charas = self.peripheral.getCharacteristics()
 
-        # print(self.SeriviceList.values())
-        # print(srvs)
-            
         # if all([str(srv.uuid) in self.SeriviceList.values() for srv in srvs]):
         #     print("found service")
         # else:
         #     raise BTLEException(BTLEException.GATT_ERROR,"The UUID registered do not inclued")
-    
-        for k in charas:
-            print(k.uuid)
-            
-        if [str(chara.uuid).upper() in self.CharacteristicList.values() for chara in charas].count(True)==len(self.CharacteristicList):
-            print("found service")
-        else:
+    	matchNum = 0
+        for chara in charas:
+			if chara.uuid in self.CharacteristicList.values():
+            	print(chara.uuid)
+				matchNum += 1
+        if matchNum is len(self.CharacteristicList):
             raise BTLEException(BTLEException.GATT_ERROR,"The UUID registered do not inclued")
 
     def disconnect(self):
@@ -85,10 +88,10 @@ if __name__ == '__main__':
 
     ble = BLEcontroller("00:1e:c0:4a:29:6d",ADDR_TYPE_PUBLIC);
     
-    ble.Service_Register("1",service_uuid)
+    ble.setService("1",service_uuid)
     
-    ble.Characteristic_Register("1",characteristic_uuid1)
-    ble.Characteristic_Register("2",characteristic_uuid2)
+    ble.setCharacteristic("1",characteristic_uuid1)
+    ble.setCharacteristic("2",characteristic_uuid2)
     
     # ble.scan()
 
