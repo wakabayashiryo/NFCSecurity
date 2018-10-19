@@ -36,7 +36,7 @@ raspberry pi ble setting
 	
 	> sudo apt-get install bluetooth bluez
 
-	3. cnfirme bleutooth device behavier    
+	3. confirm bleutooth device behavier    
 	
 	> sudo hcitool lescan   
 	
@@ -51,12 +51,7 @@ raspberry pi ble setting
 	> git clone https://github.com/IanHarvey/bluepy.git   
 	> sudo pip install bluepy
 
-	topic:serach BLE device and found its MAC address
-		
-	> sudo hcitool lescan
-		
-		or 
-		
+	topic:Other way to serach BLE device and confirm its MAC address
 	> sudo bluetoothctl   
 	> \#scan on
 

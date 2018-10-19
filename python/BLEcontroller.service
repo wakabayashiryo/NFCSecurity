@@ -1,0 +1,10 @@
+[Unit]
+Description=BLEcontroller service
+
+[Service]
+ExecStart=/usr/local/lib/BLEcontroller.py
+Restart=always
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
