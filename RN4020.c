@@ -1,5 +1,5 @@
 #include "RN4020.h"
-#include "RN4020_Cmds.h"
+#include "RN4020cmds.h"
 
 
 static void RN4020_Send_Command(const char* cmd)
@@ -14,7 +14,7 @@ static void RN4020_Send_Command(const char* cmd)
     LED2 = !LED2;
 }
 
-void RN4020_Init_PP(void)
+void RN4020_Init(void)
 {    
     _RN4020_WAKE_SW = 1;
     _RN4020_WAKE_HW = 1;

@@ -8,8 +8,8 @@
       <itemPath>main.h</itemPath>
       <itemPath>pin_def.h</itemPath>
       <itemPath>PIC_servo.h</itemPath>
-      <itemPath>RN4020_Cmds.h</itemPath>
       <itemPath>RN4020.h</itemPath>
+      <itemPath>RN4020cmds.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

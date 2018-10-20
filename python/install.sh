@@ -13,11 +13,3 @@ echo "\n\033[31m[action]\033[33m >>>> Check status  bluetooth module and enable 
 sleep 3
 sudo systemctl status bluetooth
 sudo systemctl start bluetooth
-
-echo "\n\033[31m[action]\033[33m >>>> Set deamon service for this library\033[0m"
-sleep 3
-# cp python/BLEcontroller.service /etc/systemd/system/ 
-# sudo systemctl daemon-reload
-# sudo systemctl start BLEcontroller
-# sudo systemctl enable BLEcontroller
-# sudo systemctl status BLEcontroller
