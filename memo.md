@@ -21,11 +21,11 @@ raspberry pi ble setting
 	|||Private service|
 
 
-	|   contents    |uuid|property|bits|use|
-	|:-------------:|:--:|:-------|:---:|:----:|
-	|service        | 3A41CCA5A1F946909D5E11A946BAFCB4 |    |     ||
-	|charactaristic1| 1713453B292E4B1C9515F23DDAC2B2B0 |reading |8| operating servo|
-	|charactaristic2| EB57140A35404A6D8C9740D75DF4CBEF |writing |8| magnetic sensor|
+	|   contents    |uuid|property|bits|use|handle|
+	|:-------------:|:--:|:-------|:---:|:----:|:---|
+	|service        | 3A41CCA5A1F946909D5E11A946BAFCB4 |    |     |||
+	|charactaristic1| 1713453B292E4B1C9515F23DDAC2B2B0 |reading |8| operating servo| 0x001B| 
+	|charactaristic2| EB57140A35404A6D8C9740D75DF4CBEF |writing |8| magnetic sensor| 0x001D| 
 
 
 	1.confirm depended packages 

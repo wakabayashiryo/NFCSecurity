@@ -25,16 +25,10 @@ class BLEcontroller:
         self.peripheral = Peripheral()
 
     def setService(self,key,uuid):
-        if uuid.isupper():
-            self.SeriviceList[key] = uuid.lower()
-        else:
-            self.SeriviceList[key] = uuid
+            self.SeriviceList[key] = UUID(uuid)
 
     def setCharacteristic(self,key,uuid):
-        if uuid.isupper():
-            self.CharacteristicList[key] = uuid.lower()
-        else:
-            self.CharacteristicList[key] = uuid
+        self.CharacteristicList[key] = UUID(uuid)
 
     def scan(self,timeout=3.0):
         self.devices = self.scanner.scan(timeout)        
@@ -51,13 +45,13 @@ class BLEcontroller:
         print("\n\033[33mMatched service list\033[32m")
         for srv in srvs:
             if srv.uuid in self.SeriviceList.values():
-                print(srv.uuid)
+                print('[UUID]:%s ' % srv.uuid)
 
         print("\n\033[33mMatched Characteristic list\033[32m")
         for chara in charas:
             if chara.uuid in self.CharacteristicList.values():
-                print(chara.uuid)
-        
+                print('[UUID]:%s [Handle]:0x00%X ' % (chara.uuid,chara.valHandle))
+
         print("\033[0m")
 
     def disconnect(self):
@@ -68,7 +62,7 @@ class BLEcontroller:
 
     def write(self,key,value):
         try:
-            self.peripheral.writeCharacteristic(self.CharacteristicList[key],value)
+            self.peripheral.writeCharacteristic(self.CharacteristicList[key],value,withResponse=True)
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
     
@@ -92,4 +86,10 @@ if __name__ == '__main__':
     ble.setCharacteristic("servo",'1713453B-292E-4B1C-9515-F23DDAC2B2B0')
     ble.setCharacteristic("sensor",'EB57140A-3540-4A6D-8C97-40D75DF4CBEF')
 
+    # ble.scan(10)
     ble.connect()
+
+    ble.peripheral.writeCharacteristic(0x001D,b'V',withResponse=True)
+    print(ble.peripheral.readCharacteristic(0x001B))
+    # ble.write("servo",b'\x09')
+    # print(ble.read("sensor"))    

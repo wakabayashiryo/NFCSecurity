@@ -1,7 +1,7 @@
 /*
  * File:   main.c
  * Author: Ryo Wakabayashi
- *
+ *p
  * Created on 2018/07/15, 21:26
  */
 
@@ -25,7 +25,8 @@ void main(void)
     while(1)
     {
         RN4020_Set_MagneticSensor(RN4020_Get_ServoParameter());
-        
+//        if(==56)
+//            LED1 = !LED1;
 //        SRV_PWR = SRV_ON;
 //        
 //        for(uint16_t agl = 450;agl<1000;agl++)
@@ -33,7 +34,7 @@ void main(void)
 //            Servo_Set_Parameter(agl);
 //            __delay_ms(10);
 //        }
-        __delay_ms(100);  
+        __delay_ms(50);  
     }       
 }
 
