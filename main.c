@@ -24,6 +24,7 @@ void main(void)
     
     while(1)
     {
+//        RN4020_Set_MagneticSensor(43);
         RN4020_Set_MagneticSensor(RN4020_Get_ServoParameter());
 //        if(==56)
 //            LED1 = !LED1;

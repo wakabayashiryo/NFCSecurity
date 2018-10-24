@@ -1,4 +1,5 @@
 from bluepy.btle import *
+from struct import *
 
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
@@ -18,17 +19,19 @@ class BLEcontroller:
         self.mac  = MACaddr
         self.type = TYPEaddr
 
-        self.SeriviceList = {}
-        self.CharacteristicList = {}
+        self.ServiceDict = {}
+        self.HandlesDict = {}
+        self.CharacteristicDict = {}
 
         self.scanner    = Scanner().withDelegate(ScanDelegate())
         self.peripheral = Peripheral()
 
     def setService(self,key,uuid):
-            self.SeriviceList[key] = UUID(uuid)
+        self.ServiceDict[key] = UUID(uuid)
 
     def setCharacteristic(self,key,uuid):
-        self.CharacteristicList[key] = UUID(uuid)
+        self.HandlesDict[key] = None
+        self.CharacteristicDict[key] = UUID(uuid)
 
     def scan(self,timeout=3.0):
         self.devices = self.scanner.scan(timeout)        
@@ -39,19 +42,17 @@ class BLEcontroller:
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
 
-        srvs   = self.peripheral.getServices()
-        charas = self.peripheral.getCharacteristics()
-
         print("\n\033[33mMatched service list\033[32m")
-        for srv in srvs:
-            if srv.uuid in self.SeriviceList.values():
-                print('[UUID]:%s ' % srv.uuid)
+        for key,srv in zip(self.ServiceDict.keys(),self.ServiceDict.values()):
+            tmp = self.peripheral.getServiceByUUID(srv)
+            print('[Key]:%s [UUID]:%s ' % (key,tmp.uuid))
 
         print("\n\033[33mMatched Characteristic list\033[32m")
-        for chara in charas:
-            if chara.uuid in self.CharacteristicList.values():
-                print('[UUID]:%s [Handle]:0x00%X ' % (chara.uuid,chara.valHandle))
-
+        for key,chara in zip(self.HandlesDict.keys(),self.CharacteristicDict.values()):
+            tmp = self.peripheral.getCharacteristics(uuid=chara)
+            self.HandlesDict[key] = tmp[0].getHandle()
+            print('[Key]:%s [UUID]:%s [Handle]:0x00%X ' % (key,tmp[0].uuid,tmp[0].getHandle()))
+            
         print("\033[0m")
 
     def disconnect(self):
@@ -62,13 +63,13 @@ class BLEcontroller:
 
     def write(self,key,value):
         try:
-            self.peripheral.writeCharacteristic(self.CharacteristicList[key],value,withResponse=True)
+            self.peripheral.writeCharacteristic(self.HandlesDict[key],value,withResponse=True)
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
     
     def read(self,key):
         try:
-            return self.peripheral.readCharacteristic(self.CharacteristicList[key])
+            return self.peripheral.readCharacteristic(self.HandlesDict[key])
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
         
@@ -80,16 +81,15 @@ class BLEcontroller:
 
 if __name__ == '__main__':
     ble = BLEcontroller("00:1e:c0:4a:29:6d",ADDR_TYPE_PUBLIC)
+    # ble = BLEcontroller("00:1e:c0:55:2f:20",ADDR_TYPE_PUBLIC)
     
     ble.setService("SmartLoker",'3A41CCA5-A1F9-4690-9D5E-11A946BAFCB4')
     
-    ble.setCharacteristic("servo",'1713453B-292E-4B1C-9515-F23DDAC2B2B0')
-    ble.setCharacteristic("sensor",'EB57140A-3540-4A6D-8C97-40D75DF4CBEF')
-
+    ble.setCharacteristic("sensor",'1713453B-292E-4B1C-9515-F23DDAC2B2B0')
+    ble.setCharacteristic("servo",'EB57140A-3540-4A6D-8C97-40D75DF4CBEF')
+    
     # ble.scan(10)
     ble.connect()
 
-    ble.peripheral.writeCharacteristic(0x001D,b'V',withResponse=True)
-    print(ble.peripheral.readCharacteristic(0x001B))
-    # ble.write("servo",b'\x09')
-    # print(ble.read("sensor"))    
+    ble.write("servo",pack('B',11))
+    print(unpack('B',ble.read("sensor")))    

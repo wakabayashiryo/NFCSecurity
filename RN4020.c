@@ -34,7 +34,6 @@ void RN4020_Init(void)
 
 uint8_t RN4020_Get_ServoParameter(void)
 {
-    char *buff[10];
     char c,j = 0;
     uint8_t tmp,val = 0;
     
@@ -43,37 +42,30 @@ uint8_t RN4020_Get_ServoParameter(void)
     printf(_SUR"%s\n",_PRIVATE_UUID2);
     
     while(UART_Available()==0);
-    UART_Receive();
-    UART_Receive();
-//    while(UART_Available()!=0)
+//    for(int i = 0; i < 2; i++)
 //    {
-        for(int i = 0; i < (2 * 1); i++)
-        {
-            c = (char)UART_Receive();
-
-            tmp = 0;
-            if((c >= 'A') && (c <= 'F'))
-            {
-                tmp = c - 'A' + 10;  
-            }else if((c >= '0') && (c <= '9'))
-            {
-                tmp = c - '0';  
-            }
-            val = ( val << 4 ) + tmp;
-        }
+//        c = (char)UART_Receive();
+//
+//        tmp = 0;
+//        if((c >= 'A') && (c <= 'F'))
+//        {
+//            tmp = (uint8_t)(c - 'A' + 10);  
+//        }else if((c >= '0') && (c <= '9'))
+//        {
+//            tmp = (uint8_t)(c - '0');  
+//        }
+//        val = ( val << 4 ) + tmp;
 //    }
-        
-//    if(buff=="38")LED1 = LED_ON;
-    
-//    return (uint8_t)atoi(buff);
-    return val;
+//    return val;
+//    UART_Receive();
+    return UART_Receive();
 }   
 
 void RN4020_Set_MagneticSensor(uint8_t data)
 {
     UART_Flush();
     
-    printf(_SUW"%s,%d\n",_PRIVATE_UUID1,data);
+    printf(_SUW"%s,%x\n",_PRIVATE_UUID1,data);
     
     while(UART_Available()==0);
     while((char)UART_Receive()!='\n');
