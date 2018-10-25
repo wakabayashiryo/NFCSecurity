@@ -18,14 +18,15 @@ extern "C" {
 #define _RN4020_WAKE_SW     LATC3
 
 #define _PRIVATE_SERVICE    "3A41CCA5A1F946909D5E11A946BAFCB4"
-#define _PRIVATE_UUID1      "1713453B292E4B1C9515F23DDAC2B2B0"
-#define _PRIVATE_UUID2      "EB57140A35404A6D8C9740D75DF4CBEF"
+#define _SENSOR_UUID        "1713453B292E4B1C9515F23DDAC2B2B0"
+#define _SERVO_UUID         "EB57140A35404A6D8C9740D75DF4CBEF"
     
 void RN4020_Init(void);
 
-uint8_t RN4020_Get_ServoParameter(void);
-void RN4020_Set_MagneticSensor(uint8_t data);
-
+void    RN4020_TransmitByUUID(const char* uuid,uint8_t data);
+uint8_t RN4020_ReceiveByUUID(const char* uuid);
+void    RN4020_TransmitByHandle(const char* handle,uint8_t data);
+uint8_t RN4020_ReceiveByHandle(const char* handle);
 #ifdef	__cplusplus
 }
 #endif

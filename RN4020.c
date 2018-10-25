@@ -2,7 +2,7 @@
 #include "RN4020cmds.h"
 
 
-static void RN4020_Send_Command(const char* cmd)
+static inline void RN4020_Send_Command(const char* cmd)
 {    
     UART_Flush();
     
@@ -26,54 +26,60 @@ void RN4020_Init(void)
 
     RN4020_Send_Command(_PZ);                   //Claer private service    
     RN4020_Send_Command(_PS _PRIVATE_SERVICE);
-    RN4020_Send_Command(_PC _PRIVATE_UUID1 and data(0A) and data(01));
-    RN4020_Send_Command(_PC _PRIVATE_UUID2 and data(0A) and data(01));
+    RN4020_Send_Command(_PC _SENSOR_UUID and data(02) and data(01));
+    RN4020_Send_Command(_PC _SERVO_UUID and data(08) and data(01));
     
     RN4020_Send_Command(_R_1);                  //reboot
 }
 
-uint8_t RN4020_Get_ServoParameter(void)
+static inline uint8_t _serial2num(void)
 {
-    char c,j = 0;
-    uint8_t tmp,val = 0;
-    
+    char c;
+    uint8_t i,num=0,rsp;
+            
     UART_Flush();
-    
-    printf(_SUR"%s\n",_PRIVATE_UUID2);
-    
-    while(UART_Available()==0);
-//    for(int i = 0; i < 2; i++)
-//    {
-//        c = (char)UART_Receive();
-//
-//        tmp = 0;
-//        if((c >= 'A') && (c <= 'F'))
-//        {
-//            tmp = (uint8_t)(c - 'A' + 10);  
-//        }else if((c >= '0') && (c <= '9'))
-//        {
-//            tmp = (uint8_t)(c - '0');  
-//        }
-//        val = ( val << 4 ) + tmp;
-//    }
-//    return val;
-//    UART_Receive();
-    return UART_Receive();
-}   
 
-void RN4020_Set_MagneticSensor(uint8_t data)
+    while(UART_Available()<2);
+    for(i = 0; i < 2; i++)
+    {
+        c = (char)UART_Receive();
+        
+        if(('A' <= c) && (c <= 'F'))
+            num = c - 'A' + 10;  
+        else if(('0' <= c) && (c <= '9'))
+            num = c - '0';
+        
+        rsp = (uint8_t)((rsp << 4) | num);
+    }
+    return rsp;
+}
+
+void RN4020_TransmitByUUID(const char* uuid,uint8_t data)
 {
-    UART_Flush();
-    
-    printf(_SUW"%s,%x\n",_PRIVATE_UUID1,data);
+    printf(_SUW"%s,%x\n",uuid,data);
     
     while(UART_Available()==0);
     while((char)UART_Receive()!='\n');
-    LED2 = !LED2;
 }
 
-//TODO
-/*
- *   void RN4020_TransmitByUUID(const char* uuid,uint8_t data)
- *  void RN4020_TransmitByHandle(const char* handle,uint8_t data)
-*/
+uint8_t RN4020_ReceiveByUUID(const char* uuid)
+{
+    printf(_SUR"%s\n",uuid);
+    
+    return _serial2num();
+}
+
+void RN4020_TransmitByHandle(const char* handle,uint8_t data)
+{
+    printf(_SHW"%s,%x\n",handle,data);
+    
+    while(UART_Available()==0);
+    while((char)UART_Receive()!='\n');
+}
+
+uint8_t RN4020_ReceiveByHandle(const char* handle)
+{
+    printf(_SHR"%s\n",handle);
+    
+    return _serial2num();
+}
