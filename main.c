@@ -21,18 +21,20 @@ void main(void)
     Servo_Init(Servo_Init_Pin,&LATA,2);
     
     RN4020_Init();
+    uint8_t i = 0;
     
     while(1)
     {
-        RN4020_TransmitByUUID(_SENSOR_UUID,RN4020_ReceiveByUUID(_SERVO_UUID));
-//        SRV_PWR = SRV_ON;
-//        
-//        for(uint16_t agl = 450;agl<1000;agl++)
-//        {
-//            Servo_Set_Parameter(agl);
-//            __delay_ms(10);
-//        }
-//        __delay_ms(50);  
+//        RN4020_ReceiveByUUID(_SERVO_UUID);
+//        RN4020_TransmitByUUID(_SENSOR_UUID,127);
+//        RN4020_TransmitByUUID(_STATUS_UUID,63);
+        SRV_PWR = SRV_ON;
+        for(uint16_t agl = 1000;agl<2000;agl++)
+        {
+            Servo_Set_Parameter(agl);
+            __delay_ms(10);
+        }
+        __delay_ms(50);  
     }       
 }
 

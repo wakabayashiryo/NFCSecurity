@@ -28,6 +28,7 @@ void RN4020_Init(void)
     RN4020_Send_Command(_PS _PRIVATE_SERVICE);
     RN4020_Send_Command(_PC _SENSOR_UUID and data(02) and data(01));
     RN4020_Send_Command(_PC _SERVO_UUID and data(08) and data(01));
+    RN4020_Send_Command(_PC _STATUS_UUID and data(02) and data(01));
     
     RN4020_Send_Command(_R_1);                  //reboot
 }
