@@ -32,7 +32,7 @@ void main(void)
         for(uint16_t agl = 1000;agl<2000;agl++)
         {
             Servo_Set_Parameter(agl);
-            __delay_ms(10);
+            __delay_ms(50);
         }
         __delay_ms(50);  
     }       
