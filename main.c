@@ -21,20 +21,31 @@ void main(void)
     Servo_Init(Servo_Init_Pin,&LATA,2);
     
     RN4020_Init();
-    uint8_t i = 0;
+    
+    uint8_t srv_data = RN4020_ReceiveByUUID(_SERVO_UUID);
     
     while(1)
     {
-//        RN4020_ReceiveByUUID(_SERVO_UUID);
-//        RN4020_TransmitByUUID(_SENSOR_UUID,127);
-//        RN4020_TransmitByUUID(_STATUS_UUID,63);
-        SRV_PWR = SRV_ON;
-        for(uint16_t agl = 1000;agl<2000;agl++)
-        {
-            Servo_Set_Parameter(agl);
-            __delay_ms(50);
-        }
-        __delay_ms(50);  
+        LED2 = LED_ON;
+        if(MAG_SENSOR==0)
+            RN4020_TransmitByUUID(_SENSOR_UUID,127);
+        else
+            RN4020_TransmitByUUID(_SENSOR_UUID,0);
+
+        
+        if(RN4020_ReceiveByUUID(_RELAY_UUID)==127)
+            SRV_PWR = SRV_ON;
+        else
+            SRV_PWR = SRV_OFF;
+
+        if(SRV_PWR)     LED1 = LED_ON;
+        else            LED1 = LED_OFF;
+        
+        srv_data = RN4020_ReceiveByUUID(_SERVO_UUID);
+        Servo_Set_Parameter((uint16_t)(20*srv_data));
+        RN4020_TransmitByUUID(_STATUS_UUID,srv_data);
+        LED2 = LED_OFF;
+        
     }       
 }
 

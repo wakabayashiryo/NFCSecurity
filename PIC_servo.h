@@ -13,7 +13,7 @@ extern "C" {
 #endif
 
 #define _SERVO_PARAM_MIN    500
-#define _SERVO_PARAM_MAX    10000
+#define _SERVO_PARAM_MAX    2000
     
 
 typedef void (*Servo_Init_PORTTypedef)(void);
