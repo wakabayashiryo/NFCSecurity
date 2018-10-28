@@ -22,30 +22,30 @@ void main(void)
     
     RN4020_Init();
     
-    uint8_t srv_data = RN4020_ReceiveByUUID(_SERVO_UUID);
-    
+    uint16_t srv_data;
     while(1)
     {
-        LED2 = LED_ON;
-        if(MAG_SENSOR==0)
-            RN4020_TransmitByUUID(_SENSOR_UUID,127);
-        else
-            RN4020_TransmitByUUID(_SENSOR_UUID,0);
-
-        
-        if(RN4020_ReceiveByUUID(_RELAY_UUID)==127)
-            SRV_PWR = SRV_ON;
-        else
-            SRV_PWR = SRV_OFF;
-
-        if(SRV_PWR)     LED1 = LED_ON;
-        else            LED1 = LED_OFF;
-        
+//        if(MAG_SENSOR==0)
+//            RN4020_TransmitByUUID(_SENSOR_UUID,127);
+//        else
+//            RN4020_TransmitByUUID(_SENSOR_UUID,0);
+//
+//        
+//        if(RN4020_ReceiveByUUID(_RELAY_UUID)==127)
+//        {
+//            SRV_PWR = SRV_ON;
+//            LED1 = LED_ON;
+//        }
+//        else
+//        {
+//            LED1 = LED_OFF;
+//            SRV_PWR = SRV_OFF;
+//        }
         srv_data = RN4020_ReceiveByUUID(_SERVO_UUID);
-        Servo_Set_Parameter((uint16_t)(20*srv_data));
-        RN4020_TransmitByUUID(_STATUS_UUID,srv_data);
-        LED2 = LED_OFF;
-        
+        if(srv_data == 12000)
+            LED1 = LED_ON;
+        RN4020_TransmitByUUID(_STATUS_UUID, srv_data);
+//        RN4020_TransmitByUUID(_STATUS_UUID,65530);
     }       
 }
 

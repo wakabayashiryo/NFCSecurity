@@ -91,14 +91,36 @@ class BLEcontroller:
         print("\033[0m")
 
     def write(self,key,value):
+        '''
+            [Transmittion sequense]
+            input   0xF00F
+
+            unpack  0x0FF0 (Little Endian)
+
+            bluepy  0xF00F (Little Endian)
+                        
+                    bluetooth
+
+            peripheral 0xF00F
+        '''
         try:
-            self.peripheral.writeCharacteristic(self.HandlesDict[key],pack('<B',value),withResponse=True)
+            self.peripheral.writeCharacteristic(self.HandlesDict[key],pack('>H',value),withResponse=True)
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
     
     def read(self,key):
+        '''
+            [Receive sequense]
+            peripheral 0xF00F
+
+                    bluetooth
+
+            bluepy  0x0FF0 (Little Endian)
+
+            unpack  0x0FF0 (Little Endian)
+        '''
         try:
-            return unpack('<B',self.peripheral.readCharacteristic(self.HandlesDict[key]))[0]
+            return unpack('>H',self.peripheral.readCharacteristic(self.HandlesDict[key]))[0]
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
         
@@ -113,12 +135,12 @@ if __name__ == '__main__':
     
     ble.setService("SmartLoker",'3A41CCA5-A1F9-4690-9D5E-11A946BAFCB4')
     
-    ble.setCharacteristic("sensor",'1713453B-292E-4B1C-9515-F23DDAC2B2B0')
-    ble.setCharacteristic("servo",'EB57140A-3540-4A6D-8C97-40D75DF4CBEF')
+    ble.setCharacteristic("servo" ,'EB57140A-3540-4A6D-8C97-40D75DF4CBEF')
+    ble.setCharacteristic("status",'A57CB712-3FD3-4075-9F92-528225EE04BE')
     
     # ble.scan()
     ble.connect()
     ble.write("servo",100)
-    print(ble.read("sensor"))  
+    print(ble.read("status"))  
 
     ble.disconnect()

@@ -26,22 +26,21 @@ void RN4020_Init(void)
 
     RN4020_Send_Command(_PZ);                   //Claer private service    
     RN4020_Send_Command(_PS _PRIVATE_SERVICE);
-    RN4020_Send_Command(_PC _SENSOR_UUID and data(02) and data(01));
-    RN4020_Send_Command(_PC _SERVO_UUID  and data(08) and data(01));
-    RN4020_Send_Command(_PC _STATUS_UUID and data(02) and data(01));
-    RN4020_Send_Command(_PC _RELAY_UUID  and data(08) and data(01));
+    RN4020_Send_Command(_PC _SERVO_UUID  and data(08) and data(02));
+    RN4020_Send_Command(_PC _STATUS_UUID and data(02) and data(02));
+    
     RN4020_Send_Command(_R_1);                  //reboot
 }
 
-static inline uint8_t _serial2num(void)
+static inline uint16_t _serial2num(void)
 {
     char c;
-    uint8_t i,num=0,rsp;
+    uint16_t i,num=0,rsp;
             
     UART_Flush();
 
-    while(UART_Available()<2);
-    for(i = 0; i < 2; i++)
+    while(UART_Available()<4);
+    for(i = 0; i < 2 * 2; i++)
     {
         c = (char)UART_Receive();
         
@@ -50,35 +49,35 @@ static inline uint8_t _serial2num(void)
         else if(('0' <= c) && (c <= '9'))
             num = c - '0';
         
-        rsp = (uint8_t)((rsp << 4) | num);
+        rsp = (uint16_t)((rsp << 4) + num);
     }
     return rsp;
 }
 
-void RN4020_TransmitByUUID(const char* uuid,uint8_t data)
+void RN4020_TransmitByUUID(const char* uuid,uint16_t data)
 {
-    printf(_SUW"%s,%x\n",uuid,data);
+    printf(_SUW"%s,%04x\n",uuid,data);
     
     while(UART_Available()==0);
     while((char)UART_Receive()!='\n');
 }
 
-uint8_t RN4020_ReceiveByUUID(const char* uuid)
+uint16_t RN4020_ReceiveByUUID(const char* uuid)
 {
     printf(_SUR"%s\n",uuid);
     
     return _serial2num();
 }
 
-void RN4020_TransmitByHandle(const char* handle,uint8_t data)
+void RN4020_TransmitByHandle(const char* handle,uint16_t data)
 {
-    printf(_SHW"%s,%x\n",handle,data);
+    printf(_SHW"%s,%04x\n",handle,data);
     
     while(UART_Available()==0);
     while((char)UART_Receive()!='\n');
 }
 
-uint8_t RN4020_ReceiveByHandle(const char* handle)
+uint16_t RN4020_ReceiveByHandle(const char* handle)
 {
     printf(_SHR"%s\n",handle);
     
