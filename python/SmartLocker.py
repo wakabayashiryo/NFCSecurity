@@ -69,9 +69,9 @@ class SmartLoker():
     
     def operateServo(self,boolean=False):
         if(boolean is True):
-            self.ble.write("byte","switch_servo",self.open_comm)
+            self.ble.write("byte","servo_command",self.open_comm)
         else:
-            self.ble.write("byte","switch_servo",self.close_comm)
+            self.ble.write("byte","servo_command",self.close_comm)
         
 
 if __name__ == '__main__':
