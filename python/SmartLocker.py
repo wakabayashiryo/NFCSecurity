@@ -38,8 +38,8 @@ if __name__ == '__main__':
 
     try:
         while True:
-            locker.ble.write("servo",1200)
-            print(locker.ble.read("status"))
+            locker.ble.write("short","servo",1200)
+            print(locker.ble.read("short","status"))
             # locker.operateServo(True)
             # sleep(3)
             # print(locker.getServoStatus())

@@ -90,18 +90,32 @@ class BLEcontroller:
             
         print("\033[0m")
 
-    def write(self,key,value):
-        
-        data_type = '>H'
+    def write(self,data_type,key,value):
+        if   data_type is "byte":
+            fmt = '>B'
+        elif data_type is "short":
+            fmt = '>H'
+        elif data_type is "long":
+            fmt = '>L
+        else:
+            fmt = '>L
+
         try:
-            self.peripheral.writeCharacteristic(self.HandlesDict[key],pack(data_type,value),withResponse=True)
+            self.peripheral.writeCharacteristic(self.HandlesDict[key],pack(fmt,value),withResponse=True)
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
     
-    def read(self,key):
-        data_type = '>H'
+    def read(self,data_type,key):
+        if   data_type is "byte":
+            fmt = '>B'
+        elif data_type is "short":
+            fmt = '>H'
+        elif data_type is "long":
+            fmt = '>L
+        else:
+            fmt = '>L
         try:
-            return unpack(data_type,self.peripheral.readCharacteristic(self.HandlesDict[key]))[0]
+            return unpack(fmt,self.peripheral.readCharacteristic(self.HandlesDict[key]))[0]
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
         
