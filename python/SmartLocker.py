@@ -5,10 +5,10 @@ import struct
 
 class SmartLoker():
     def __init__(self,openParam=1000,closeParam=2000):
-        self.cloese_comm        = 0
+        self.close_comm        = 0
         self.open_comm          = 1
         self.close_param_comm   = 2
-        self.open_param_comma   = 3
+        self.open_param_comm    = 3
 
         self.openParameter = openParam
         self.closeParameter = closeParam
@@ -25,15 +25,21 @@ class SmartLoker():
 
         self.ble.write("short","servo_param",self.openParameter)
         self.ble.write("byte","switch_servo",self.open_param_comm)
-        if(self.ble.read("short","status") != self.openParameter):
-            print("Faild set parameter")
+        response = self.ble.read("short","status")
+        if(response is self.openParameter):
+            print("success set open paramter[%d] return [%d]" % (self.openParameter,response))
+        else:
+            print("Faild set parameter %d" % response)
 
         self.ble.write("short","servo_param",self.closeParameter)
         self.ble.write("byte","switch_servo",self.close_param_comm)
-        if(self.ble.read("short","status") != self.closeParameter):
-            print("Faild set parameter")
+        response = self.ble.read("short","status")
+        if(response is self.openParameter):
+            print("success set close paramter[%d] return [%d]" % (self.openParameter,response))
+        else:
+            print("Faild set parameter %d" % response)
 
-        self.bel.write("byte","switch_servo",self.close_comm)
+        self.ble.write("byte","switch_servo",self.close_comm)
 
 
     def getServoStatus(self):
