@@ -8,7 +8,7 @@ class SmartLoker():
         self.cloese_comm        = 0
         self.open_comm          = 1
         self.close_param_comm   = 2
-        self.open_param_command = 3
+        self.open_param_comma   = 3
 
         self.openParameter = openParam
         self.closeParameter = closeParam
@@ -24,12 +24,12 @@ class SmartLoker():
         self.ble.connect()
 
         self.ble.write("short","servo_param",self.openParameter)
-        self.ble.write("byte","switch_servo",self.open_param_command)
+        self.ble.write("byte","switch_servo",self.open_param_comm)
         if(self.ble.read("short","status") != self.openParameter):
             print("Faild set parameter")
 
         self.ble.write("short","servo_param",self.closeParameter)
-        self.ble.write("byte","switch_servo",self.close_param_command)
+        self.ble.write("byte","switch_servo",self.close_param_comm)
         if(self.ble.read("short","status") != self.closeParameter):
             print("Faild set parameter")
 
