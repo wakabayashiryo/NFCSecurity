@@ -96,9 +96,9 @@ class BLEcontroller:
         elif data_type is "short":
             fmt = '>H'
         elif data_type is "long":
-            fmt = '>L
+            fmt = '>L'
         else:
-            fmt = '>L
+            fmt = '>L'
 
         try:
             self.peripheral.writeCharacteristic(self.HandlesDict[key],pack(fmt,value),withResponse=True)
@@ -111,9 +111,9 @@ class BLEcontroller:
         elif data_type is "short":
             fmt = '>H'
         elif data_type is "long":
-            fmt = '>L
+            fmt = '>L'
         else:
-            fmt = '>L
+            fmt = '>L'
         try:
             return unpack(fmt,self.peripheral.readCharacteristic(self.HandlesDict[key]))[0]
         except BTLEException as BLEexc:
@@ -135,7 +135,7 @@ if __name__ == '__main__':
     
     # ble.scan()
     ble.connect()
-    ble.write("servo",100)
-    print(ble.read("status"))  
+    ble.write("byte","servo",100)
+    print(ble.read("byte","status"))  
 
     ble.disconnect()

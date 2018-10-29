@@ -60,9 +60,12 @@ void RN4020_Init_Peripheral(void)
 void RN4020_Init_PrivateService(void)
 {
     _send_command(_PZ);                   //Claer private service    
+    
     _send_command(_PS _PRIVATE_SERVICE);
-    _send_command(_PC _SERVO_UUID  and data(08) and data(02));
-    _send_command(_PC _STATUS_UUID and data(02) and data(02));
+    
+    _send_command(_PC _SWITCH_SERVO_UUID  and data(08) and data(01));
+    _send_command(_PC _SERVO_PARAM_UUID   and data(08) and data(02));
+    _send_command(_PC _STATUS_UUID        and data(02) and data(01));
     
     _send_command(_R_1);                  //reboot
 }

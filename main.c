@@ -7,6 +7,11 @@
 
 #include "main.h"
 
+#define _CLOSE          0
+#define _OPEN           1
+#define _CLOSE_PARAM    2
+#define _OPEN_PARAM     3
+
 void main(void) 
 {
     Device_Startup();
@@ -23,30 +28,26 @@ void main(void)
     RN4020_Init_Peripheral();
     RN4020_Init_PrivateService();
     
-    uint16_t srv_data;
+    uint16_t srv_open,srv_close;
     while(1)
     {
-//        if(MAG_SENSOR==0)
-//            RN4020_TransmitByUUID(_SENSOR_UUID,127);
-//        else
-//            RN4020_TransmitByUUID(_SENSOR_UUID,0);
-//
-//        
-//        if(RN4020_ReceiveByUUID(_RELAY_UUID)==127)
-//        {
-//            SRV_PWR = SRV_ON;
-//            LED1 = LED_ON;
-//        }
-//        else
-//        {
-//            LED1 = LED_OFF;
-//            SRV_PWR = SRV_OFF;
-//        }
-        srv_data = RN4020_Receive16ByUUID(_SERVO_UUID);
-        if(srv_data == 12000)
-            LED1 = LED_ON;
-        RN4020_Transmit16ByUUID(_STATUS_UUID, srv_data);
-//        RN4020_Transmit16ByUUID(_STATUS_UUID,65530);
+        switch(RN4020_Receive8ByUUID(_SWITCH_SERVO_UUID))
+        {
+            case _CLOSE:
+                break;
+            case _OPEN:
+                break;
+            case _CLOSE_PARAM:
+                srv_open = RN4020_Receive16ByUUID(_SERVO_PARAM_UUID);
+                RN4020_Transmit16ByUUID(_STATUS_UUID, srv_open);
+                break;
+            case _OPEN_PARAM:
+                srv_close = RN4020_Receive16ByUUID(_SERVO_PARAM_UUID);
+                RN4020_Transmit16ByUUID(_STATUS_UUID, srv_close);
+                break;
+            default:
+                break;
+        }
     }       
 }
 
