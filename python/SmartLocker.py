@@ -26,7 +26,7 @@ class SmartLoker():
         self.ble.write("short","servo_param",self.openParameter)
         self.ble.write("byte","switch_servo",self.open_param_comm)
         response = self.ble.read("short","status")
-        if(response is self.openParameter):
+        if(response == self.openParameter):
             print("success set open paramter[%d] return [%d]" % (self.openParameter,response))
         else:
             print("Faild set parameter %d" % response)
@@ -34,8 +34,8 @@ class SmartLoker():
         self.ble.write("short","servo_param",self.closeParameter)
         self.ble.write("byte","switch_servo",self.close_param_comm)
         response = self.ble.read("short","status")
-        if(response is self.openParameter):
-            print("success set close paramter[%d] return [%d]" % (self.openParameter,response))
+        if(response == self.closeParameter):
+            print("success set close paramter[%d] return [%d]" % (self.closeParameter,response))
         else:
             print("Faild set parameter %d" % response)
 
