@@ -54,9 +54,9 @@ class SmartLoker():
 if __name__ == '__main__':
     locker = SmartLoker( )
     i = 0
-
     try:
         while True:
+            pass
             # locker.ble.write("short","servo",1200)
             # print(locker.ble.read("short","status"))
             # locker.operateServo(True)
@@ -65,10 +65,8 @@ if __name__ == '__main__':
             # locker.operateServo(False)
             # sleep(3)          
             # print(locker.getServoStatus())
-
     except KeyboardInterrupt:
         exit()
-
     # switch servo
     # 0: close
     # 1: open
