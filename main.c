@@ -20,7 +20,8 @@ void main(void)
     
     Servo_Init(Servo_Init_Pin,&LATA,2);
     
-    RN4020_Init();
+    RN4020_Init_Peripheral();
+    RN4020_Init_PrivateService();
     
     uint16_t srv_data;
     while(1)
@@ -41,11 +42,11 @@ void main(void)
 //            LED1 = LED_OFF;
 //            SRV_PWR = SRV_OFF;
 //        }
-        srv_data = RN4020_ReceiveByUUID(_SERVO_UUID);
+        srv_data = RN4020_Receive16ByUUID(_SERVO_UUID);
         if(srv_data == 12000)
             LED1 = LED_ON;
-        RN4020_TransmitByUUID(_STATUS_UUID, srv_data);
-//        RN4020_TransmitByUUID(_STATUS_UUID,65530);
+        RN4020_Transmit16ByUUID(_STATUS_UUID, srv_data);
+//        RN4020_Transmit16ByUUID(_STATUS_UUID,65530);
     }       
 }
 

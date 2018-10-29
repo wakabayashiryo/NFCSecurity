@@ -21,12 +21,28 @@ extern "C" {
 #define _SERVO_UUID         "EB57140A35404A6D8C9740D75DF4CBEF"
 #define _STATUS_UUID        "A57CB7123FD340759F92528225EE04BE"
     
-void RN4020_Init(void);
+    
+void RN4020_Init_Peripheral(void);
+void RN4020_Init_PrivateService(void);
 
-void RN4020_TransmitByUUID(const char* uuid,uint16_t data);
-uint16_t RN4020_ReceiveByUUID(const char* uuid);
-void RN4020_TransmitByHandle(const char* handle,uint16_t data);
-uint16_t RN4020_ReceiveByHandle(const char* handle);
+
+void RN4020_Transmit8ByUUID (const char* uuid,uint8_t  data);
+void RN4020_Transmit16ByUUID(const char* uuid,uint16_t data);
+void RN4020_Transmit32ByUUID(const char* uuid,uint32_t data);
+
+uint8_t  RN4020_Receive8ByUUID (const char* uuid);
+uint16_t RN4020_Receive16ByUUID(const char* uuid);
+uint32_t RN4020_Receive32ByUUID(const char* uuid);
+
+
+void RN4020_Transmit8ByHandle (const char* handle,uint8_t  data);
+void RN4020_Transmit16ByHandle(const char* handle,uint16_t data);
+void RN4020_Transmit32ByHandle(const char* handle,uint32_t data);
+
+uint8_t  RN4020_Receive8ByHandle (const char* handle);
+uint16_t RN4020_Receive16ByHandle(const char* handle);
+uint32_t RN4020_Receive32ByHandle(const char* handle);
+
 #ifdef	__cplusplus
 }
 #endif

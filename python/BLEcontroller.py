@@ -91,36 +91,17 @@ class BLEcontroller:
         print("\033[0m")
 
     def write(self,key,value):
-        '''
-            [Transmittion sequense]
-            input   0xF00F
-
-            unpack  0x0FF0 (Little Endian)
-
-            bluepy  0xF00F (Little Endian)
-                        
-                    bluetooth
-
-            peripheral 0xF00F
-        '''
+        
+        data_type = '>H'
         try:
-            self.peripheral.writeCharacteristic(self.HandlesDict[key],pack('>H',value),withResponse=True)
+            self.peripheral.writeCharacteristic(self.HandlesDict[key],pack(data_type,value),withResponse=True)
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
     
     def read(self,key):
-        '''
-            [Receive sequense]
-            peripheral 0xF00F
-
-                    bluetooth
-
-            bluepy  0x0FF0 (Little Endian)
-
-            unpack  0x0FF0 (Little Endian)
-        '''
+        data_type = '>H'
         try:
-            return unpack('>H',self.peripheral.readCharacteristic(self.HandlesDict[key]))[0]
+            return unpack(data_type,self.peripheral.readCharacteristic(self.HandlesDict[key]))[0]
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
         
