@@ -75,13 +75,11 @@ if __name__ == '__main__':
     # 2: set open parameter
     # 3: set close parameter
     
-    '''
-    setting sequense
-    1. write open parameters
-    2. write No.2 switch servo characteristic to store open parameter in device
-    3. compare whether the transmitted parameter is the same as the value received from status characteristic
-    4. write close parameters
-    5. write No.3 switch servo characteristic to store close parameter in device
-    6. compare whether the transmitted parameter is the same as the value received from status characteristic
-    7. write No.0 switch servo characteristic
-    '''
+    # setting sequense
+    # 1. write open parameters
+    # 2. write No.2 switch servo characteristic to store open parameter in device
+    # 3. compare whether the transmitted parameter is the same as the value received from status characteristic
+    # 4. write close parameters
+    # 5. write No.3 switch servo characteristic to store close parameter in device
+    # 6. compare whether the transmitted parameter is the same as the value received from status characteristic
+    # 7. write No.0 switch servo characteristic
