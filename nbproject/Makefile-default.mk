@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=PIC_UART.c main.c PIC_servo.c RN4020.c
+SOURCEFILES_QUOTED_IF_SPACED=PIC_UART.c main.c PIC_servo.c RN4020.c PIC_Timer0.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/PIC_UART.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/PIC_servo.p1 ${OBJECTDIR}/RN4020.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/PIC_UART.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/PIC_servo.p1.d ${OBJECTDIR}/RN4020.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/PIC_UART.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/PIC_servo.p1 ${OBJECTDIR}/RN4020.p1 ${OBJECTDIR}/PIC_Timer0.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/PIC_UART.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/PIC_servo.p1.d ${OBJECTDIR}/RN4020.p1.d ${OBJECTDIR}/PIC_Timer0.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/PIC_UART.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/PIC_servo.p1 ${OBJECTDIR}/RN4020.p1
+OBJECTFILES=${OBJECTDIR}/PIC_UART.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/PIC_servo.p1 ${OBJECTDIR}/RN4020.p1 ${OBJECTDIR}/PIC_Timer0.p1
 
 # Source Files
-SOURCEFILES=PIC_UART.c main.c PIC_servo.c RN4020.c
+SOURCEFILES=PIC_UART.c main.c PIC_servo.c RN4020.c PIC_Timer0.c
 
 
 CFLAGS=
@@ -121,6 +121,13 @@ ${OBJECTDIR}/RN4020.p1: RN4020.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/RN4020.p1 RN4020.c 
 	@${FIXDEPS} ${OBJECTDIR}/RN4020.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/PIC_Timer0.p1: PIC_Timer0.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/PIC_Timer0.p1.d 
+	@${RM} ${OBJECTDIR}/PIC_Timer0.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/PIC_Timer0.p1 PIC_Timer0.c 
+	@${FIXDEPS} ${OBJECTDIR}/PIC_Timer0.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/PIC_UART.p1: PIC_UART.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -149,6 +156,13 @@ ${OBJECTDIR}/RN4020.p1: RN4020.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/RN4020.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/RN4020.p1 RN4020.c 
 	@${FIXDEPS} ${OBJECTDIR}/RN4020.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/PIC_Timer0.p1: PIC_Timer0.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/PIC_Timer0.p1.d 
+	@${RM} ${OBJECTDIR}/PIC_Timer0.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/PIC_Timer0.p1 PIC_Timer0.c 
+	@${FIXDEPS} ${OBJECTDIR}/PIC_Timer0.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

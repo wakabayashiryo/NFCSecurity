@@ -14,8 +14,6 @@ static inline void _send_command(const char* cmd)
     puts(cmd);
     
     _wait_linefeed();
-    
-    LED2 = !LED2;
 }
 
 /*this function convert serial data that is big-endian order*/

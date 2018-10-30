@@ -23,6 +23,10 @@ class NotifyDelegate(DefaultDelegate):
     def handleNotification(self,cHandle,data):
         print("\033[36mHandle %x, Data %d \033[0m" % (cHandle,unpack('<B',data)))
 
+def scan(timeout=10.0):
+    scanner = Scanner().withDelegate(ScanDelegate())
+    scanner.scan(timeout)        
+    
 class BLEcontroller:
     def __init__(self,MACaddr,TYPEaddr):
         self.mac  = MACaddr
@@ -32,7 +36,6 @@ class BLEcontroller:
         self.HandlesDict = {}
         self.CharacteristicDict = {}
 
-        self.scanner    = Scanner().withDelegate(ScanDelegate())
         self.peripheral = Peripheral()
 
     def setService(self,key,uuid):
@@ -40,11 +43,8 @@ class BLEcontroller:
 
     def setCharacteristic(self,key,uuid):
         self.HandlesDict[key] = None
-        self.CharacteristicDict[key] = UUID(uuid)
+        self.CharacteristicDict[key] = UUID(uuid)    
 
-    def scan(self,timeout=10.0):
-        self.devices = self.scanner.scan(timeout)        
-        
     def connect(self,showGATT=False):
         try:
             self.peripheral.connect(self.mac,self.type)
@@ -67,6 +67,7 @@ class BLEcontroller:
         
         self.checkAllocation()
 
+
     def disconnect(self):
         try:
             self.peripheral.disconnect()
@@ -74,7 +75,8 @@ class BLEcontroller:
             self.error_message(BLEexc)
 
         print("\n\033[33mDisonnected Device %s (%s) \033[0m" % (self.mac,self.type))
-        
+
+
     def checkAllocation(self):
         print("\033[4mCheck the specified UUID\033[0m")
         print("\033[32mMatched services\033[33m")
@@ -89,6 +91,7 @@ class BLEcontroller:
             print('\t[Key]:%s [UUID]:%s [Handle]:0x%04X [Property]:%s' % (key,tmp[0].uuid,tmp[0].getHandle(),tmp[0].propertiesToString()))
             
         print("\033[0m")
+
 
     def write(self,data_type,key,value):
         if   data_type is "byte":
@@ -105,6 +108,7 @@ class BLEcontroller:
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
     
+
     def read(self,data_type,key):
         if   data_type is "byte":
             fmt = '>B'
@@ -119,6 +123,7 @@ class BLEcontroller:
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
         
+
     def error_message(self,exce):
         error_code = ["disconnected.","common error.","internal error.","GATT error.","managment error."]
         print("\033[31mThe error cotents is "+error_code[exce.code-1])
@@ -126,16 +131,4 @@ class BLEcontroller:
 
 
 if __name__ == '__main__':
-    ble = BLEcontroller("00:1e:c0:4a:29:6d",ADDR_TYPE_PUBLIC)
-    
-    ble.setService("SmartLoker",'3A41CCA5-A1F9-4690-9D5E-11A946BAFCB4')
-    
-    ble.setCharacteristic("servo" ,'EB57140A-3540-4A6D-8C97-40D75DF4CBEF')
-    ble.setCharacteristic("status",'A57CB712-3FD3-4075-9F92-528225EE04BE')
-    
-    # ble.scan()
-    ble.connect()
-    ble.write("byte","servo",100)
-    print(ble.read("byte","status"))  
-
-    ble.disconnect()
+    scan()

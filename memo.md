@@ -60,3 +60,19 @@ raspberry pi ble setting
 
 Excute the command at */usr/local/lib/python3.5/dist-packages/bluepy-1.2.0-py3.5.egg/bluepy*
 > sudo make
+
+        # switch servo command
+        # 0: close
+        # 1: open
+        # 2: set open parameter
+        # 3: set close parameter
+        
+        # setting sequense
+        # 1. write open parameters
+        # 2. write No.2 to switch servo characteristic to store open parameter in device
+        # 3. compare whether the transmitted parameter is the same as the value received from status characteristic
+        # 4. write close parameters
+        # 5. write No.3 to switch servo characteristic to store close parameter in device
+        # 6. compare whether the transmitted parameter is the same as the value received from status characteristic
+        # 7. write No.0 to switch servo characteristic
+        

@@ -54,6 +54,11 @@ void Servo_Set_Parameter(uint16_t param)
     srv_param = param;
 }
 
+uint16_t Servo_Get_Parameter(void)
+{
+    return srv_param;
+}
+
 void Servo_Transmit_Interrupt(void)
 {
     if(TMR1IF&&TMR1IE)

@@ -13,7 +13,7 @@ extern "C" {
 #endif
 
 #define _SERVO_PARAM_MIN    500
-#define _SERVO_PARAM_MAX    2000
+#define _SERVO_PARAM_MAX    2500
     
 
 typedef void (*Servo_Init_PORTTypedef)(void);
@@ -22,6 +22,7 @@ typedef void (*Servo_Init_PORTTypedef)(void);
 void Servo_Init(Servo_Init_PORTTypedef Servo_InitPort,volatile uint8_t *Signal_PORT,uint8_t  Signal_Pin);
 
 void Servo_Set_Parameter(uint16_t param);
+uint16_t Servo_Get_Parameter(void);
 
 void Servo_Transmit_Interrupt(void);
 

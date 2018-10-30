@@ -41,6 +41,7 @@
 #include "pin_def.h"
 #include "PIC_UART.h"
 #include "PIC_servo.h"
+#include "PIC_Timer0.h"
 #include "RN4020.h"
 //#include "periphral header file"
 
