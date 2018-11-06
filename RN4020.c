@@ -17,7 +17,7 @@ static inline void _send_command(const char* cmd)
 }
 
 /*this function convert serial data that is big-endian order*/
-static inline uint32_t _serial2num(uint8_t bytes)
+static inline uint32_t _hexStr2dec(uint8_t bytes)
 {
     char c;
     uint8_t i,num=0;
@@ -47,10 +47,10 @@ void RN4020_Init_Peripheral(void)
     _RN4020_WAKE_SW = 1;
     _RN4020_WAKE_HW = 1;
 
-    _send_command(_SF data(1));           //factory reset,
-    _send_command(_SB data(4));           //UART baudrate is 115200bps
-    _send_command(_SR data(24000000));    //Peripheral and auto advertise,No Direct Advertisement
-    _send_command(_SS data(80040001));    //use service DeviceInformation,TX Power,Private service
+    _send_command(_SF param(1));           //factory reset,
+    _send_command(_SB param(4));           //UART baudrate is 115200bps
+    _send_command(_SR param(24000000));    //Peripheral and auto advertise,No Direct Advertisement
+    _send_command(_SS param(80040001));    //use service DeviceInformation,TX Power,Private service
 
     _send_command(_R_1);                  //reboot
 }
@@ -61,9 +61,9 @@ void RN4020_Init_PrivateService(void)
     
     _send_command(_PS _PRIVATE_SERVICE);
     
-    _send_command(_PC _SERVO_COMMAND_UUID and data(08) and data(01));
-    _send_command(_PC _SERVO_PARAM_UUID   and data(08) and data(02));
-    _send_command(_PC _STATUS_UUID        and data(02) and data(02));
+    _send_command(_PC _SERVO_COMMAND_UUID and param(08) and param(01));
+    _send_command(_PC _SERVO_PARAM_UUID   and param(08) and param(02));
+    _send_command(_PC _STATUS_UUID        and param(02) and param(02));
     
     _send_command(_R_1);                  //reboot
 }
@@ -94,21 +94,21 @@ uint8_t  RN4020_Receive8ByUUID (const char* uuid)
 {
     printf(_SUR"%s\n",uuid);
     
-    return (uint8_t)_serial2num(1);
+    return (uint8_t)_hexStr2dec(1);
 }
 
 uint16_t RN4020_Receive16ByUUID(const char* uuid)
 {
     printf(_SUR"%s\n",uuid);
     
-    return (uint16_t)_serial2num(2);
+    return (uint16_t)_hexStr2dec(2);
 }
 
 uint32_t RN4020_Receive32ByUUID(const char* uuid)
 {
     printf(_SUR"%s\n",uuid);
     
-    return (uint32_t)_serial2num(4);
+    return (uint32_t)_hexStr2dec(4);
 }
 
 
@@ -138,19 +138,19 @@ uint8_t  RN4020_Receive8ByHandle (const char* handle)
 {
     printf(_SHR"%s\n",handle);
     
-    return (uint8_t)_serial2num(1);
+    return (uint8_t)_hexStr2dec(1);
 }
 
 uint16_t RN4020_Receive16ByHandle(const char* handle)
 {
     printf(_SHR"%s\n",handle);
     
-    return (uint16_t)_serial2num(2);
+    return (uint16_t)_hexStr2dec(2);
 }
 
 uint32_t RN4020_Receive32ByHandle(const char* handle)
 {
     printf(_SHR"%s\n",handle);
     
-    return (uint32_t)_serial2num(4);
+    return (uint32_t)_hexStr2dec(4);
 }

@@ -1,5 +1,5 @@
 from bluepy.btle import *
-from struct import *
+from struct import pack,unpack
 
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
@@ -28,9 +28,9 @@ def scan(timeout=10.0):
     scanner.scan(timeout)        
     
 class BLEcontroller:
-    def __init__(self,MACaddr,TYPEaddr):
+    def __init__(self,MACaddr,addrTYPE):
         self.mac  = MACaddr
-        self.type = TYPEaddr
+        self.type = addrTYPE
 
         self.ServiceDict = {}
         self.HandlesDict = {}
@@ -55,17 +55,9 @@ class BLEcontroller:
         print("\n\033[33mConnected Device %s (%s) \033[0m" % (self.mac,self.type))
         
         if showGATT is True:
-            srvs = self.peripheral.getServices()
-            print("\n\033[32mThe detail of GATT server connected.")
-            for srv in srvs:
-                print('\033[33m[Service]\n[UUID]:%s ' % srv.uuid)
-                charas = srv.getCharacteristics()
-                print("\t\033[34m[Characteristic]") 
-                for chara in charas:
-                    print('\t[UUID]:%s [Handle]:0x%04X [Property]:%s' % (chara.uuid,chara.getHandle(),chara.propertiesToString()))
-                print("\033[0m")
-        
-        self.checkAllocation()
+            self.showAllAttributes()
+
+        self.searchAttributes()
 
 
     def disconnect(self):
@@ -76,8 +68,18 @@ class BLEcontroller:
 
         print("\n\033[33mDisonnected Device %s (%s) \033[0m" % (self.mac,self.type))
 
+    def showAllAttributes(self):
+        srvs = self.peripheral.getServices()
+        print("\n\033[32mThe detail of GATT server connected.")
+        for srv in srvs:
+            print('\033[33m[Service]\n[UUID]:%s ' % srv.uuid)
+            charas = srv.getCharacteristics()
+            print("\t\033[34m[Characteristic]") 
+            for chara in charas:
+                print('\t[UUID]:%s [Handle]:0x%04X [Property]:%s' % (chara.uuid,chara.getHandle(),chara.propertiesToString()))
+            print("\033[0m")
 
-    def checkAllocation(self):
+    def searchAttributes(self):
         print("\033[4mCheck the specified UUID\033[0m")
         print("\033[32mMatched services\033[33m")
         for key,srv in zip(self.ServiceDict.keys(),self.ServiceDict.values()):
@@ -107,7 +109,6 @@ class BLEcontroller:
             self.peripheral.writeCharacteristic(self.HandlesDict[key],pack(fmt,value),withResponse=True)
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
-    
 
     def read(self,data_type,key):
         if   data_type is "byte":
@@ -122,7 +123,6 @@ class BLEcontroller:
             return unpack(fmt,self.peripheral.readCharacteristic(self.HandlesDict[key]))[0]
         except BTLEException as BLEexc:
             self.error_message(BLEexc)
-        
 
     def error_message(self,exce):
         error_code = ["disconnected.","common error.","internal error.","GATT error.","managment error."]

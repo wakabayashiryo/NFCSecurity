@@ -1,11 +1,11 @@
 /*
  *
  * How toe use 
- *  RN4020_Send_Command(PC data(1A) and data(08));
+ *  RN4020_Send_Command(PC param1A) and param08));
  *  >> PC,1A,08
  */
 
-#define data(value)    #value
+#define param(value)    #value
 #define and             ","
 
 #define _S       "S,"
