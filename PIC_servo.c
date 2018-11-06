@@ -54,6 +54,11 @@ void Servo_Set_Parameter(uint16_t param)
     srv_param = param;
 }
 
+uint16_t Servo_Get_Parameter(void)
+{
+    return srv_param;
+}
+
 void Servo_Transmit_Interrupt(void)
 {
     if(TMR1IF&&TMR1IE)
@@ -61,7 +66,7 @@ void Servo_Transmit_Interrupt(void)
         if(((*SigPort)&SigPin_Mask) == SigPin_Mask)
         {
             Signal_Low();                    //toggle signal 
-            TMR1 = 0xFFFF-10000-srv_param;   //set time of low pulse width
+            TMR1 = 0xFFFF-20000+srv_param;   //set time of low pulse width
         }
         else
         {

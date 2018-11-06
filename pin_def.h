@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-#define MAG_SENSOR  LATA1
+#define MAG_SENSOR  RA1
 
 #define SRV_PWR     LATA0
 

@@ -7,8 +7,19 @@
 
 #include "main.h"
 
+#define _CLOSE          0
+#define _OPEN           1
+#define _CLOSE_PARAM    2
+#define _OPEN_PARAM     3
+
+static uint16_t srv_pwr_timer;
+#define _delay_srv_off(ms)  srv_pwr_timer=ms
+
 void main(void) 
 {
+    uint16_t open_p;
+    uint16_t close_p;
+    
     Device_Startup();
     
     LED1 = LED_OFF;
@@ -18,22 +29,77 @@ void main(void)
     
     SRV_PWR = SRV_OFF;
     
+    Timer0_Init(TMR0_PRESCALER64,125);
+    
     Servo_Init(Servo_Init_Pin,&LATA,2);
     
-    RN4020_Init();
+    RN4020_Init_Peripheral();
+    RN4020_Init_PrivateService();
     
     while(1)
-    {
-        RN4020_TransmitByUUID(_SENSOR_UUID,RN4020_ReceiveByUUID(_SERVO_UUID));
-//        SRV_PWR = SRV_ON;
-//        
-//        for(uint16_t agl = 450;agl<1000;agl++)
-//        {
-//            Servo_Set_Parameter(agl);
-//            __delay_ms(10);
-//        }
-//        __delay_ms(50);  
+    {   
+        if(MAG_SENSOR == 0) LED2 = LED_ON;
+        else                LED2 = LED_OFF;
+        
+        switch(RN4020_Receive8ByUUID(_SERVO_COMMAND_UUID))
+        {
+            case _CLOSE:
+                if(Servo_Get_Parameter() != close_p)
+                {
+                    if(MAG_SENSOR == 0)
+                    {
+                        SRV_PWR = SRV_ON;
+                        LED1 = LED_ON;
+
+                        Servo_Set_Parameter(close_p);
+                        _delay_srv_off(1000);
+                    }
+                }
+                RN4020_Transmit16ByUUID(_STATUS_UUID,Servo_Get_Parameter());
+                break;
+                
+            case _OPEN:
+                if(Servo_Get_Parameter() != open_p)
+                {
+                    if(MAG_SENSOR == 0)
+                    {
+                        SRV_PWR = SRV_ON;
+                        LED1 = LED_ON;
+            
+                        Servo_Set_Parameter(open_p);
+                        _delay_srv_off(1000);                        
+                    }
+                }    
+                RN4020_Transmit16ByUUID(_STATUS_UUID,Servo_Get_Parameter());
+                break;
+                
+            case _CLOSE_PARAM:
+                close_p = RN4020_Receive16ByUUID(_SERVO_PARAM_UUID);
+                RN4020_Transmit16ByUUID(_STATUS_UUID, close_p);
+                break;
+                
+            case _OPEN_PARAM:
+                open_p = RN4020_Receive16ByUUID(_SERVO_PARAM_UUID);
+                RN4020_Transmit16ByUUID(_STATUS_UUID, open_p);
+                break;
+                
+            default:
+                break;
+        }
     }       
+}
+
+void interrupt Handler(void)
+{
+    if(Timer0_CheckFlag())
+    {
+        if(srv_pwr_timer>0)
+            srv_pwr_timer--;
+        else
+        {   LED1 = LED_OFF; SRV_PWR = SRV_OFF;   }
+    }
+    Servo_Transmit_Interrupt();
+    UART_Interrupt();
 }
 
 void Device_Startup(void)
@@ -56,12 +122,6 @@ void Servo_Init_Pin(void)
 {
     TRISA  &= ~(1<<2);
     ANSELA &= ~(1<<2);
-}
-
-void interrupt Handler(void)
-{
-    Servo_Transmit_Interrupt();
-    UART_Interrupt();
 }
 
 void UART_Init_Port(void)
