@@ -33,12 +33,14 @@ class SmartLocker():
         else:
             return 'error'
 
-    def operateServo(self,operate='open'):
+    def operateServo(self,operate):
         if(operate is 'open'):
             self.ble.write("byte","servo_command",self.open_comm)
-        else:
+        elif(operate is 'close'):
             self.ble.write("byte","servo_command",self.close_comm)
-        
+        else:
+            return 'error'
+            
     def setParameterWhenOpen(self,parameter):
         #Write paramter to device to set parameter when locker open
         self.ble.write("short","servo_param",parameter)
