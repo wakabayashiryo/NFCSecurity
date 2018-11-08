@@ -1,5 +1,4 @@
 from BLEcontroller import BLEcontroller
-from time import sleep
 
 class SmartLocker():
     def __init__(self,openParam=1000,closeParam=2000):
@@ -19,7 +18,7 @@ class SmartLocker():
         self.ble.setCharacteristic("servo_param"  ,'EB57140A-3540-4A6D-8C97-40D75DF4CBEF')
         self.ble.setCharacteristic("status"       ,'A57CB712-3FD3-4075-9F92-528225EE04BE')
 
-        self.ble.connect(True)
+        self.ble.connect()
 
         self.setParameterWhenOpen (openParam)
         self.setParameterWhenClose(closeParam)
@@ -70,19 +69,4 @@ class SmartLocker():
 
         #Move to Idle state
         self.ble.write("byte","servo_command",self.close_comm)
-    
-if __name__ == '__main__':
-    locker = SmartLocker(850,2100)
-    try:
-        while True:
-            locker.operateServo('open')
-            print(locker.getServoStatus())
-            sleep(1)
-
-            locker.operateServo('close')
-            print(locker.getServoStatus())
-            sleep(1)
-
-    except KeyboardInterrupt:
-        exit()
     

@@ -13,7 +13,7 @@
 #define _OPEN_PARAM     3
 
 static uint16_t srv_pwr_timer;
-#define _delay_srv_off(ms)  srv_pwr_timer=ms
+#define __delay_srv_on(ms)  srv_pwr_timer=ms
 
 void main(void) 
 {
@@ -27,9 +27,9 @@ void main(void)
     
     UART_Init(UART_Init_Port,BAUD_115_2K);
     
-    SRV_PWR = SRV_OFF;
-    
     Timer0_Init(TMR0_PRESCALER64,125);
+    
+    SRV_PWR = SRV_OFF;
     
     Servo_Init(Servo_Init_Pin,&LATA,2);
     
@@ -48,11 +48,11 @@ void main(void)
                 {
                     if(MAG_SENSOR == 0)
                     {
-                        SRV_PWR = SRV_ON;
                         LED1 = LED_ON;
+                        SRV_PWR = SRV_ON;
 
                         Servo_Set_Parameter(close_p);
-                        _delay_srv_off(1000);
+                        __delay_srv_on(1000);
                     }
                 }
                 RN4020_Transmit16ByUUID(_STATUS_UUID,Servo_Get_Parameter());
@@ -63,11 +63,11 @@ void main(void)
                 {
                     if(MAG_SENSOR == 0)
                     {
-                        SRV_PWR = SRV_ON;
                         LED1 = LED_ON;
+                        SRV_PWR = SRV_ON;
             
                         Servo_Set_Parameter(open_p);
-                        _delay_srv_off(1000);                        
+                        __delay_srv_on(1000);                        
                     }
                 }    
                 RN4020_Transmit16ByUUID(_STATUS_UUID,Servo_Get_Parameter());
