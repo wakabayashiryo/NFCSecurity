@@ -50,7 +50,7 @@ class SmartLocker():
         if(response == parameter):
             print("Success to set open paramter. wrote paramter:[%d] response from device:[%d]" % (parameter,response))
         else:
-            print("Faild set parameter %d" % response)
+            print("Failed to set parameter %d" % response)
         
         #Move to Idle state
         self.ble.write("byte","servo_command",self.open_comm)
@@ -65,8 +65,10 @@ class SmartLocker():
         if(response == parameter):
             print("Success to set close paramter. wrote paramter:[%d] response from device:[%d]" % (parameter,response))
         else:
-            print("Faild set parameter %d" % response)
+            print("Failed to set parameter %d" % response)
 
         #Move to Idle state
         self.ble.write("byte","servo_command",self.close_comm)
     
+    def disconnectDevice(self):
+        self.ble.disconnect()

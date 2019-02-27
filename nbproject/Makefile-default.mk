@@ -98,6 +98,7 @@ ${OBJECTDIR}/PIC_UART.p1: PIC_UART.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/PIC_UART.p1.d 
 	@${RM} ${OBJECTDIR}/PIC_UART.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/PIC_UART.p1 PIC_UART.c 
+	@-${MV} ${OBJECTDIR}/PIC_UART.d ${OBJECTDIR}/PIC_UART.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/PIC_UART.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
@@ -105,6 +106,7 @@ ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/main.p1.d 
 	@${RM} ${OBJECTDIR}/main.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/main.p1 main.c 
+	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/PIC_servo.p1: PIC_servo.c  nbproject/Makefile-${CND_CONF}.mk
@@ -112,6 +114,7 @@ ${OBJECTDIR}/PIC_servo.p1: PIC_servo.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/PIC_servo.p1.d 
 	@${RM} ${OBJECTDIR}/PIC_servo.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/PIC_servo.p1 PIC_servo.c 
+	@-${MV} ${OBJECTDIR}/PIC_servo.d ${OBJECTDIR}/PIC_servo.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/PIC_servo.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/RN4020.p1: RN4020.c  nbproject/Makefile-${CND_CONF}.mk
@@ -119,6 +122,7 @@ ${OBJECTDIR}/RN4020.p1: RN4020.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/RN4020.p1.d 
 	@${RM} ${OBJECTDIR}/RN4020.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/RN4020.p1 RN4020.c 
+	@-${MV} ${OBJECTDIR}/RN4020.d ${OBJECTDIR}/RN4020.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/RN4020.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/PIC_Timer0.p1: PIC_Timer0.c  nbproject/Makefile-${CND_CONF}.mk
@@ -126,6 +130,7 @@ ${OBJECTDIR}/PIC_Timer0.p1: PIC_Timer0.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/PIC_Timer0.p1.d 
 	@${RM} ${OBJECTDIR}/PIC_Timer0.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/PIC_Timer0.p1 PIC_Timer0.c 
+	@-${MV} ${OBJECTDIR}/PIC_Timer0.d ${OBJECTDIR}/PIC_Timer0.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/PIC_Timer0.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
@@ -134,6 +139,7 @@ ${OBJECTDIR}/PIC_UART.p1: PIC_UART.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/PIC_UART.p1.d 
 	@${RM} ${OBJECTDIR}/PIC_UART.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/PIC_UART.p1 PIC_UART.c 
+	@-${MV} ${OBJECTDIR}/PIC_UART.d ${OBJECTDIR}/PIC_UART.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/PIC_UART.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
@@ -141,6 +147,7 @@ ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/main.p1.d 
 	@${RM} ${OBJECTDIR}/main.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/main.p1 main.c 
+	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/PIC_servo.p1: PIC_servo.c  nbproject/Makefile-${CND_CONF}.mk
@@ -148,6 +155,7 @@ ${OBJECTDIR}/PIC_servo.p1: PIC_servo.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/PIC_servo.p1.d 
 	@${RM} ${OBJECTDIR}/PIC_servo.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/PIC_servo.p1 PIC_servo.c 
+	@-${MV} ${OBJECTDIR}/PIC_servo.d ${OBJECTDIR}/PIC_servo.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/PIC_servo.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/RN4020.p1: RN4020.c  nbproject/Makefile-${CND_CONF}.mk
@@ -155,6 +163,7 @@ ${OBJECTDIR}/RN4020.p1: RN4020.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/RN4020.p1.d 
 	@${RM} ${OBJECTDIR}/RN4020.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/RN4020.p1 RN4020.c 
+	@-${MV} ${OBJECTDIR}/RN4020.d ${OBJECTDIR}/RN4020.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/RN4020.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/PIC_Timer0.p1: PIC_Timer0.c  nbproject/Makefile-${CND_CONF}.mk
@@ -162,6 +171,7 @@ ${OBJECTDIR}/PIC_Timer0.p1: PIC_Timer0.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/PIC_Timer0.p1.d 
 	@${RM} ${OBJECTDIR}/PIC_Timer0.p1 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c90 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/PIC_Timer0.p1 PIC_Timer0.c 
+	@-${MV} ${OBJECTDIR}/PIC_Timer0.d ${OBJECTDIR}/PIC_Timer0.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/PIC_Timer0.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif

@@ -32,6 +32,7 @@ void main(void)
     SRV_PWR = SRV_OFF;
     
     Servo_Init(Servo_Init_Pin,&LATA,2);
+    TMR1IE = 0;     //Block transmitting to Servo
     
     RN4020_Init_Peripheral();
     RN4020_Init_PrivateService();
@@ -43,46 +44,50 @@ void main(void)
         
         switch(RN4020_Receive8ByUUID(_SERVO_COMMAND_UUID))
         {
-            case _CLOSE:
-                if(Servo_Get_Parameter() != close_p)
-                {
-                    if(MAG_SENSOR == 0)
-                    {
-                        LED1 = LED_ON;
-                        SRV_PWR = SRV_ON;
-
-                        Servo_Set_Parameter(close_p);
-                        __delay_srv_on(1000);
-                    }
-                }
-                RN4020_Transmit16ByUUID(_STATUS_UUID,Servo_Get_Parameter());
-                break;
-                
             case _OPEN:
-                if(Servo_Get_Parameter() != open_p)
+                if(Servo_Get_Parameter() == close_p)
                 {
                     if(MAG_SENSOR == 0)
                     {
                         LED1 = LED_ON;
-                        SRV_PWR = SRV_ON;
-            
+
                         Servo_Set_Parameter(open_p);
+
+                        SRV_PWR = SRV_ON;           
                         __delay_srv_on(1000);                        
                     }
                 }    
                 RN4020_Transmit16ByUUID(_STATUS_UUID,Servo_Get_Parameter());
                 break;
                 
-            case _CLOSE_PARAM:
-                close_p = RN4020_Receive16ByUUID(_SERVO_PARAM_UUID);
-                RN4020_Transmit16ByUUID(_STATUS_UUID, close_p);
+            case _CLOSE:
+                if(Servo_Get_Parameter() == open_p)
+                {
+                    if(MAG_SENSOR == 0)
+                    {
+                        LED1 = LED_ON;
+
+                        Servo_Set_Parameter(close_p);
+
+                        SRV_PWR = SRV_ON;
+                        __delay_srv_on(1000);
+                    }
+                }
+                RN4020_Transmit16ByUUID(_STATUS_UUID,Servo_Get_Parameter());
                 break;
                 
             case _OPEN_PARAM:
                 open_p = RN4020_Receive16ByUUID(_SERVO_PARAM_UUID);
                 RN4020_Transmit16ByUUID(_STATUS_UUID, open_p);
                 break;
-                
+
+            case _CLOSE_PARAM:
+                close_p = RN4020_Receive16ByUUID(_SERVO_PARAM_UUID);
+                RN4020_Transmit16ByUUID(_STATUS_UUID, close_p);
+                Servo_Set_Parameter(close_p);
+                TMR1IE = 1;
+                break;
+                    
             default:
                 break;
         }
