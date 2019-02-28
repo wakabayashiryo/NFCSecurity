@@ -6,6 +6,7 @@ class SmartLocker():
         self.open_comm          = 1
         self.close_param_comm   = 2
         self.open_param_comm    = 3
+        self.idle_comm          = 4
 
         self.openParameter = openParam
         self.closeParameter = closeParam
@@ -39,6 +40,8 @@ class SmartLocker():
             self.ble.write("byte","servo_command",self.close_comm)
         else:
             return 'error'
+
+        self.ble.write("byte","servo_command",self.idle_comm)
             
     def setParameterWhenOpen(self,parameter):
         #Write paramter to device to set parameter when locker open
@@ -53,7 +56,7 @@ class SmartLocker():
             print("Failed to set parameter %d" % response)
         
         #Move to Idle state
-        self.ble.write("byte","servo_command",self.open_comm)
+        self.ble.write("byte","servo_command",self.idle_comm)
         
     def setParameterWhenClose(self,parameter):
         #Write paramter to device to set parameter when locker close
@@ -68,7 +71,7 @@ class SmartLocker():
             print("Failed to set parameter %d" % response)
 
         #Move to Idle state
-        self.ble.write("byte","servo_command",self.close_comm)
+        self.ble.write("byte","servo_command",self.idle_comm)
     
     def disconnectDevice(self):
         self.ble.disconnect()
